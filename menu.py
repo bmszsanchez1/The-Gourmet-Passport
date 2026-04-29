@@ -37,7 +37,8 @@ def mostrar_menu_principal():
     print("4. Comprar producto")
     print("5. Ver menú dinámico")
     print("6. Cambiar país del mes")
-    print("7. Salir")
+    print("7. Mostrar ticket")
+    print("8. Salir")
 
 
 def mostrar_paises_disponibles():
