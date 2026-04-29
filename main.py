@@ -2,14 +2,8 @@
 # main.py
 
 from reservas import gestionar_reserva, mostrar_reservas
-
-
-def mostrar_menu_principal():
-    print("= THE GOURMET PASSPORT =")
-    print("1. Gestionar reserva")
-    print("2. Ver reservas")
-    print("3. Salir")
-
+from tienda import mostrar_productos, comprar_producto
+from menu import mostrar_menu_principal
 
 def main():
     while True:
@@ -21,10 +15,13 @@ def main():
         elif opcion == "2":
             mostrar_reservas()
         elif opcion == "3":
+            mostrar_productos()
+        elif opcion == "4":
+            comprar_producto()
+        elif opcion == "5":
             print("Saliendo del programa...")
             break
         else:
             print("Opción no válida. Inténtalo de nuevo.\n")
-
 
 main()
