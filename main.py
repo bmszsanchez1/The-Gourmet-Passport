@@ -3,7 +3,7 @@
 
 from reservas import gestionar_reserva, mostrar_reservas
 from tienda import mostrar_productos, comprar_producto
-from menu import mostrar_menu_principal
+from menu import mostrar_menu_principal, mostrar_menu, cambiar_pais
 
 def main():
     while True:
@@ -19,9 +19,14 @@ def main():
         elif opcion == "4":
             comprar_producto()
         elif opcion == "5":
+            mostrar_menu()
+        elif opcion == "6":
+            cambiar_pais()
+        elif opcion == "7":
             print("Saliendo del programa...")
             break
         else:
             print("Opción no válida. Inténtalo de nuevo.\n")
+
 
 main()
