@@ -6,6 +6,8 @@ productos = [
     {"nombre": "Pasta italiana", "precio": 6, "stock": 12}
 ]
 
+compras_realizadas = []
+
 def mostrar_productos():
     print("\n-TIENDA GOURMET-")
 
@@ -41,6 +43,15 @@ def comprar_producto():
         
         producto["stock"] -= cantidad
         total = producto["precio"] * cantidad
+        
+        compra = {
+            "producto": producto["nombre"],
+            "cantidad": cantidad,
+            "precio_unitario": producto["precio"],
+            "subtotal": total
+}
+
+        compras_realizadas.append(compra)
 
         print("\nCompra realizada con éxito.")
         print(f"Producto: {producto['nombre']}")
