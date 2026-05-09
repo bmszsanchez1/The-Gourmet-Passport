@@ -4,10 +4,10 @@ from datetime import datetime
 from tienda import compras_realizadas
 
 
-def calcular_total():
+def calcular_total(compras):
     total_final = 0
 
-    for compra in compras_realizadas:
+    for compra in compras:
         total_final += compra["subtotal"]
 
     return total_final
@@ -19,7 +19,7 @@ def mostrar_ticket():
         return
 
     fecha_actual = datetime.now().strftime("%d/%m/%Y %H:%M")
-    total_final = calcular_total()
+    total_final = calcular_total(compras_realizadas)
     
     guardar_venta_en_archivo(fecha_actual, total_final)
 
