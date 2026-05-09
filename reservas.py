@@ -75,8 +75,17 @@ def gestionar_reserva():
     }
 
     reservas.append(reserva)
+    guardar_reserva_en_archivo(reserva)
 
     print("\nReserva registrada correctamente.")
     print(f"Cliente: {nombre}")
     print(f"Fecha: {fecha}")
     print(f"Número de personas: {personas}\n")
+    
+def guardar_reserva_en_archivo(reserva):
+    with open("data/reservas.txt", "a", encoding="utf-8") as archivo:
+        archivo.write(
+            f"Cliente: {reserva['cliente']} | "
+            f"Fecha: {reserva['fecha']} | "
+            f"Personas: {reserva['personas']}\n"
+        )
