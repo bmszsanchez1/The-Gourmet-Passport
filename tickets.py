@@ -20,6 +20,8 @@ def mostrar_ticket():
 
     fecha_actual = datetime.now().strftime("%d/%m/%Y %H:%M")
     total_final = calcular_total()
+    
+    guardar_venta_en_archivo(fecha_actual, total_final)
 
     print("\n================================")
     print("       THE GOURMET PASSPORT")
@@ -40,5 +42,22 @@ def mostrar_ticket():
     print(f"TOTAL FINAL: {total_final:.2f}€")
     print("================================\n")
     
-    compras_realizadas.clear()
     print("Gracias por su compra.\n")
+    compras_realizadas.clear()
+
+    
+def guardar_venta_en_archivo(fecha, total_final):
+    with open("data/ventas.txt", "a", encoding="utf-8") as archivo:
+        archivo.write("THE GOURMET PASSPORT\n")
+        archivo.write(f"Fecha: {fecha}\n")
+
+        for compra in compras_realizadas:
+            archivo.write(
+                f"Producto: {compra['producto']} | "
+                f"Cantidad: {compra['cantidad']} | "
+                f"Precio: {compra['precio_unitario']}€ | "
+                f"Subtotal: {compra['subtotal']:.2f}€\n"
+            )
+
+        archivo.write(f"Total final: {total_final:.2f}€\n")
+        archivo.write("-" * 40 + "\n")
