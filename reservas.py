@@ -1,8 +1,10 @@
 # reservas.py
 
 from datetime import datetime
+import os
 
 reservas = []
+RUTA_RESERVAS = "data/reservas.txt"
 
 
 def pedir_nombre_cliente():
@@ -75,17 +77,38 @@ def gestionar_reserva():
     }
 
     reservas.append(reserva)
-    guardar_reserva_en_archivo(reserva)
+    guardar_reservas()
 
     print("\nReserva registrada correctamente.")
     print(f"Cliente: {nombre}")
     print(f"Fecha: {fecha}")
     print(f"Número de personas: {personas}\n")
     
-def guardar_reserva_en_archivo(reserva):
-    with open("data/reservas.txt", "a", encoding="utf-8") as archivo:
-        archivo.write(
-            f"Cliente: {reserva['cliente']} | "
-            f"Fecha: {reserva['fecha']} | "
-            f"Personas: {reserva['personas']}\n"
-        )
+def guardar_reservas():
+    os.makedirs("data", exist_ok=True)
+
+    with open(RUTA_RESERVAS, "w", encoding="utf-8") as archivo:
+        for reserva in reservas:
+            archivo.write(
+                f"{reserva['cliente']};"
+                f"{reserva['fecha']};"
+                f"{reserva['personas']}\n"
+            )
+
+def cargar_reservas():
+    try:
+        with open(RUTA_RESERVAS, "r", encoding="utf-8") as archivo:
+            for linea in archivo:
+                datos = linea.strip().split(";")
+
+                if len(datos) == 3:
+                    reserva = {
+                        "cliente": datos[0],
+                        "fecha": datos[1],
+                        "personas": int(datos[2])
+                    }
+
+                    reservas.append(reserva)
+
+    except FileNotFoundError:
+        os.makedirs("data", exist_ok=True)
