@@ -2,12 +2,13 @@
 # main.py
 
 from reservas import gestionar_reserva, mostrar_reservas, cargar_reservas
-from tienda import mostrar_productos, comprar_producto
+from tienda import mostrar_productos, comprar_producto, cargar_productos
 from menu import mostrar_menu_principal, mostrar_menu, cambiar_pais
 from tickets import mostrar_ticket
 
 def main():
     cargar_reservas()
+    cargar_productos()
     
     while True:
         mostrar_menu_principal()
