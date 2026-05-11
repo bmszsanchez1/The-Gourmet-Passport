@@ -1,5 +1,9 @@
 #Tienda
 
+import os
+
+RUTA_PRODUCTOS = "data/productos.txt"
+
 productos = [
     {"nombre": "Salsa picante", "precio": 5, "stock": 10},
     {"nombre": "Té matcha", "precio": 8, "stock": 6},
@@ -19,6 +23,45 @@ def mostrar_productos():
         )
 
     print()
+
+def guardar_productos():
+    os.makedirs("data", exist_ok=True)
+
+    with open(RUTA_PRODUCTOS, "w", encoding="utf-8") as archivo:
+        for producto in productos:
+            archivo.write(
+                f"{producto['nombre']};"
+                f"{producto['precio']};"
+                f"{producto['stock']}\n"
+            )
+
+
+def cargar_productos():
+    try:
+        productos.clear()
+
+        with open(RUTA_PRODUCTOS, "r", encoding="utf-8") as archivo:
+            for linea in archivo:
+                datos = linea.strip().split(";")
+
+                if len(datos) == 3:
+                    producto = {
+                        "nombre": datos[0],
+                        "precio": float(datos[1]),
+                        "stock": int(datos[2])
+                    }
+
+                    productos.append(producto)
+
+    except FileNotFoundError:
+        productos.extend([
+        {"nombre": "Salsa picante", "precio": 5, "stock": 10},
+        {"nombre": "Té matcha", "precio": 8, "stock": 6},
+        {"nombre": "Pasta italiana", "precio": 6, "stock": 12}
+    ])
+
+    guardar_productos()
+
 
 def comprar_producto():
     mostrar_productos()
@@ -42,6 +85,7 @@ def comprar_producto():
             return
         
         producto["stock"] -= cantidad
+        guardar_productos()
         total = producto["precio"] * cantidad
         
         compra = {
