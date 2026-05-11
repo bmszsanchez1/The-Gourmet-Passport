@@ -1,12 +1,14 @@
 # Main
 # main.py
 
-from reservas import gestionar_reserva, mostrar_reservas
+from reservas import gestionar_reserva, mostrar_reservas, cargar_reservas
 from tienda import mostrar_productos, comprar_producto
 from menu import mostrar_menu_principal, mostrar_menu, cambiar_pais
 from tickets import mostrar_ticket
 
 def main():
+    cargar_reservas()
+    
     while True:
         mostrar_menu_principal()
         opcion = input("Selecciona una opción: ").strip()
